@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Hanken+Grotesk:wght@300;400&amp;family=Alexandria:wght@400;500&amp;display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+@font-face{font-family:'Amira Typo';src:url('./uploads/alfont_com_Amira-Typo.ttf') format('truetype');font-display:swap}
+html,body{margin:0;padding:0;background:#fff8f1;scrollbar-width:none}
+html::-webkit-scrollbar{display:none}
+body{-webkit-font-smoothing:antialiased;font-feature-settings:"clig","liga";color:#120b0c}
+a{color:#850e35;text-decoration:none}
+a:hover{color:#4a1019}
+::selection{background:#850e35;color:#fff8f1}
+</style>
+</helmet>
+
+<div data-ui data-pre style="position:fixed;inset:0;z-index:200;background:#fff8f1;display:flex;flex-direction:column;align-items:center;justify-content:center;clip-path:inset(0 0 0 0)">
+  <div data-pl-line style="position:absolute;left:0;right:0;top:50%;height:1.5px;background:#850e35;transform:scaleX(0);transform-origin:left center"></div>
+  <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:4vh;margin-top:-22vh">
+    <div style="overflow:hidden;padding:0 1vw"><div data-pl-word style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(9vw,16vh);line-height:.9;letter-spacing:.06em;color:#4a1019;transform:translateY(105%)">ROSE</div></div>
+  </div>
+  <div style="position:absolute;top:calc(50% + 4vh);display:flex;flex-direction:column;align-items:center;gap:.6vh;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(12px,min(.9vw,1.6vh));letter-spacing:.24em;text-transform:uppercase;color:#850e35;text-align:center">
+    <div style="overflow:hidden"><div data-pl-l style="transform:translateY(110%)">A Campaign About</div></div>
+    <div style="overflow:hidden"><div data-pl-l style="transform:translateY(110%)">Feelings, Wrapped</div></div>
+    <div style="overflow:hidden"><div data-pl-l style="transform:translateY(110%)">in Flowers.</div></div>
+  </div>
+  <div data-pl-bot style="position:absolute;right:12vw;bottom:0;width:6vw;height:34vh;opacity:0">
+    <div data-sway style="position:absolute;inset:0;transform-origin:50% 100%">
+      <div style="position:absolute;left:50%;top:3.2vw;bottom:0;width:1px;background:#850e35"></div>
+      <div style="position:absolute;left:50%;top:0;width:3.2vw;height:3.2vw;margin-left:-1.6vw;box-sizing:border-box;border:1px solid #850e35;border-radius:50%"></div>
+      <div style="position:absolute;left:50%;top:.8vw;width:1.6vw;height:1.6vw;margin-left:-.8vw;box-sizing:border-box;border:1px solid #850e35;border-radius:50%"></div>
+      <div style="position:absolute;left:50%;top:44%;width:2.6vw;height:1vw;box-sizing:border-box;border:1px solid #850e35;border-radius:0 100% 0 100%;transform:rotate(-30deg);transform-origin:left center"></div>
+      <div style="position:absolute;right:50%;top:62%;width:2.2vw;height:.9vw;box-sizing:border-box;border:1px solid #850e35;border-radius:100% 0 100% 0;transform:rotate(30deg);transform-origin:right center"></div>
+    </div>
+  </div>
+</div>
+
+<div data-ui data-trans style="position:fixed;inset:0;z-index:150;background:#fff8f1;clip-path:inset(100% 0 0 0);pointer-events:none">
+  <div data-trans-line style="position:absolute;left:50%;top:0;bottom:0;width:1.5px;background:#850e35;transform:scaleY(0);transform-origin:top center"></div>
+</div>
+
+<div data-ui data-cursor-el style="position:fixed;left:0;top:0;width:0;height:0;z-index:300;pointer-events:none;display:none">
+  <div data-cursor-dot style="position:absolute;width:max(84px,4.6vw);height:max(84px,4.6vw);left:calc(max(84px,4.6vw) / -2);top:calc(max(84px,4.6vw) / -2);box-sizing:border-box;border-radius:50%;border:1.5px solid #850e35;background:#850e35;transform:scale(.13);transition:transform 450ms cubic-bezier(.16,1,.3,1), background 300ms ease;display:flex;align-items:center;justify-content:center">
+    <span data-cursor-txt style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,.62vw);letter-spacing:.2em;color:#fff8f1;opacity:0;transition:opacity 300ms ease">VIEW</span>
+  </div>
+</div>
+
+<nav data-ui data-nav style="position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;padding:2.6vh 7.5vw;background:rgba(255,248,241,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1.5px solid #e8ddd7;transition:padding 400ms cubic-bezier(.16,1,.3,1);font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(12px,min(.83vw,1.48vh));letter-spacing:.18em;text-transform:uppercase">
+  <a href="#cover" data-link onClick="{{ goTop }}" style="position:relative;color:#850e35;padding:.4vh 0">ROSE<span data-ul style="position:absolute;left:0;right:0;bottom:0;height:1px;background:#850e35;transform:scaleX(0);transform-origin:left center;transition:transform 300ms cubic-bezier(.16,1,.3,1)"></span></a>
+  <a href="#concept" data-link onClick="{{ goCampaign }}" style="position:relative;color:#850e35;padding:.4vh 0">Campaign<span data-ul style="position:absolute;left:0;right:0;bottom:0;height:1px;background:#850e35;transform:scaleX(0);transform-origin:left center;transition:transform 300ms cubic-bezier(.16,1,.3,1)"></span></a>
+  <a href="#exec1" data-link onClick="{{ goStories }}" style="position:relative;color:#850e35;padding:.4vh 0">Stories<span data-ul style="position:absolute;left:0;right:0;bottom:0;height:1px;background:#850e35;transform:scaleX(0);transform-origin:left center;transition:transform 300ms cubic-bezier(.16,1,.3,1)"></span></a>
+  <a href="#final" data-link onClick="{{ goContact }}" style="position:relative;color:#850e35;padding:.4vh 0">Contact<span data-ul style="position:absolute;left:0;right:0;bottom:0;height:1px;background:#850e35;transform:scaleX(0);transform-origin:left center;transition:transform 300ms cubic-bezier(.16,1,.3,1)"></span></a>
+</nav>
+
+<div data-ui style="position:fixed;left:3.2vw;top:50%;height:24vh;margin-top:-12vh;width:1.5px;background:#e8ddd7;z-index:40;pointer-events:none">
+  <div data-prog style="position:absolute;inset:0;background:#850e35;transform:scaleY(0);transform-origin:top center"></div>
+</div>
+<div data-ui style="position:fixed;right:7.5vw;bottom:3.4vh;z-index:40;pointer-events:none;display:flex;gap:1.2vw;align-items:baseline;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35;background:rgba(255,248,241,.86);padding:.6vh .8vw">
+  <span>{{ idxNum }} / 15</span><span style="color:#120b0c">{{ idxName }}</span>
+</div>
+
+<sc-if value="{{ showCtrl }}" hint-placeholder-val="{{ true }}">
+<div data-ui style="position:fixed;left:7.5vw;bottom:3.4vh;z-index:45;display:flex;gap:.6vw">
+  <div style="display:flex;border:1.5px solid #850e35;border-radius:60px;overflow:hidden;background:#fff8f1"><button onClick="{{ toEdit }}" style="background:#850e35;color:#fff8f1;border:none;padding:.7vh 1.1vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background 300ms ease, color 300ms ease">Edit</button><button onClick="{{ toPresent }}" style="background:#fff8f1;color:#850e35;border:none;padding:.7vh 1.1vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background 300ms ease, color 300ms ease" style-hover="background:#ffc4c4">Present</button></div>
+  <button onClick="{{ savePdf }}" style="border:1.5px solid #850e35;border-radius:60px;background:#fff8f1;color:#850e35;padding:.7vh 1vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background 300ms ease, color 300ms ease, opacity 300ms ease" style-hover="background:#850e35;color:#fff8f1">Save as PDF</button>
+  <button onClick="{{ saveBackup }}" style="border:1.5px solid #850e35;border-radius:60px;background:#fff8f1;color:#850e35;padding:.7vh 1vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background 300ms ease, color 300ms ease" style-hover="background:#850e35;color:#fff8f1">Save backup</button>
+  <button onClick="{{ loadBackup }}" style="border:1.5px solid #850e35;border-radius:60px;background:#fff8f1;color:#850e35;padding:.7vh 1vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background 300ms ease, color 300ms ease" style-hover="background:#850e35;color:#fff8f1">Load backup</button>
+  <button onClick="{{ deleteSlide }}" style="border:1.5px solid #850e35;border-radius:60px;background:#fff8f1;color:#850e35;padding:.7vh 1vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background 300ms ease, color 300ms ease" style-hover="background:#850e35;color:#fff8f1">Delete slide</button>
+  <sc-if value="{{ hasDeleted }}" hint-placeholder-val="{{ false }}"><button onClick="{{ restoreAll }}" style="border:1.5px solid #850e35;border-radius:60px;background:#fff8f1;color:#850e35;padding:.7vh 1vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background 300ms ease, color 300ms ease" style-hover="background:#850e35;color:#fff8f1">Restore deleted ({{ delN }})</button></sc-if>
+</div>
+<div data-ui data-imgdel style="position:fixed;left:0;top:0;z-index:46;display:none;gap:.4vw">
+  <button onClick="{{ replaceImage }}" style="border:1.5px solid #850e35;border-radius:60px;background:#850e35;color:#fff8f1;padding:.7vh 1vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background 300ms ease, color 300ms ease" style-hover="background:#4a1019;color:#fff8f1">Replace image</button>
+  <button onClick="{{ deleteImage }}" style="border:1.5px solid #850e35;border-radius:60px;background:#fff8f1;color:#850e35;padding:.7vh 1vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background 300ms ease, color 300ms ease" style-hover="background:#850e35;color:#fff8f1">Delete image</button>
+</div>
+</sc-if>
+<sc-if value="{{ showEditBtn }}" hint-placeholder-val="{{ false }}">
+<div data-ui style="position:fixed;left:7.5vw;bottom:3.4vh;z-index:45;opacity:.55;transition:opacity 300ms ease;display:flex;border:1.5px solid #850e35;border-radius:60px;overflow:hidden;background:#fff8f1" style-hover="opacity:1"><button onClick="{{ toEdit }}" style="background:#fff8f1;color:#850e35;border:none;padding:.7vh 1.1vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background 300ms ease, color 300ms ease" style-hover="background:#ffc4c4">Edit</button><button onClick="{{ toPresent }}" style="background:#850e35;color:#fff8f1;border:none;padding:.7vh 1.1vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background 300ms ease, color 300ms ease">Present</button></div>
+</sc-if>
+
+<section id="cover" data-sec data-screen-label="01 Cover" style="position:relative;height:100vh;min-height:100vh;overflow:hidden;scroll-snap-align:start;background:#fff8f1">
+  <div data-r="grow" data-o="center top" data-t="1600" style="position:absolute;left:7.5vw;top:0;bottom:0;width:1px;background:#e8ddd7"></div>
+  <div data-r="grow" data-o="center bottom" data-t="1600" style="position:absolute;right:7.5vw;top:0;bottom:0;width:1px;background:#e8ddd7"></div>
+  <div style="position:absolute;left:7.5vw;top:12.5vh;width:34vw;display:flex;justify-content:space-between;padding-left:1.4vw;box-sizing:border-box;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35">
+    <span data-r="left" data-d="100">Social Media Campaign</span>
+    <span data-r="right" data-d="200">Spring / Summer 2026</span>
+  </div>
+  <div style="position:absolute;left:7.5vw;top:19vh;width:34vw;padding-left:1.4vw;box-sizing:border-box;font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(3.4vw,6vh);line-height:1;letter-spacing:-0.02em;color:#4a1019">
+    <div data-r="clip" data-d="250">A Campaign About</div>
+    <div data-r="clip" data-d="380"><em>Feelings,</em> Wrapped</div>
+    <div data-r="clip" data-d="510">in Flowers.</div>
+  </div>
+  <p data-r="up" data-d="700" style="position:absolute;left:7.5vw;top:37vh;margin:0;padding-left:1.4vw;width:23vw;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">A visual campaign created to position flowers as more than a gift — but as a meaningful way to express feelings.</p>
+
+  <div data-p="30" style="position:absolute;left:37vw;top:9vh;width:6vw;height:34vh;z-index:1">
+    <div data-r="fade" data-d="1300" data-t="2000" style="position:absolute;inset:0">
+      <div data-sway style="position:absolute;inset:0;transform-origin:50% 100%">
+        <div style="position:absolute;left:50%;top:3.2vw;bottom:0;width:1px;background:#850e35"></div>
+        <div style="position:absolute;left:50%;top:0;width:3.2vw;height:3.2vw;margin-left:-1.6vw;box-sizing:border-box;border:1px solid #850e35;border-radius:50%"></div>
+        <div style="position:absolute;left:50%;top:.8vw;width:1.6vw;height:1.6vw;margin-left:-.8vw;box-sizing:border-box;border:1px solid #850e35;border-radius:50%"></div>
+        <div style="position:absolute;left:50%;top:44%;width:2.6vw;height:1vw;box-sizing:border-box;border:1px solid #850e35;border-radius:0 100% 0 100%;transform:rotate(-30deg);transform-origin:left center"></div>
+      </div>
+    </div>
+  </div>
+
+  <div data-p="60" style="position:absolute;right:7.5vw;top:12vh;height:74vh;aspect-ratio:4/5;z-index:1">
+    <div data-r="img" data-d="600" data-cursor="view" style="position:absolute;inset:0;overflow:hidden">
+      <div data-inner style="position:absolute;inset:0"><image-slot id="hero-a" shape="rect" placeholder="Campaign post — dominant"></image-slot></div>
+    </div>
+  </div>
+  <div data-r="fade" data-d="1400" style="position:absolute;right:7.5vw;top:87.4vh;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35">Post 01 — Romance</div>
+  <div data-p="25" style="position:absolute;right:42vw;top:21vh;height:35vh;aspect-ratio:4/5;z-index:2">
+    <div data-r="img" data-d="850" data-cursor="view" style="position:absolute;inset:0;overflow:hidden">
+      <div data-inner style="position:absolute;inset:0"><image-slot id="hero-b" shape="rect" placeholder="Campaign post"></image-slot></div>
+    </div>
+  </div>
+  <div data-p="90" style="position:absolute;right:36vw;top:62vh;height:24vh;aspect-ratio:4/5;z-index:2">
+    <div data-r="img" data-d="1050" data-cursor="view" style="position:absolute;inset:0;overflow:hidden">
+      <div data-inner style="position:absolute;inset:0"><image-slot id="hero-c" shape="rect" placeholder="Cropped detail"></image-slot></div>
+    </div>
+  </div>
+
+  <div style="position:absolute;left:6.4vw;bottom:2vh;z-index:3;display:flex;font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(21vw,37vh);line-height:.8;letter-spacing:-0.02em;color:#4a1019;pointer-events:none">
+    <span data-r="clip" data-d="300" data-t="1400">R</span>
+    <span data-r="clip" data-d="400" data-t="1400">O</span>
+    <span data-r="clip" data-d="500" data-t="1400">S</span>
+    <span data-r="clip" data-d="600" data-t="1400">E</span>
+  </div>
+</section>
+
+<section id="overview" data-sec data-screen-label="02 Overview" style="position:relative;min-height:100vh;box-sizing:border-box;padding:13vh 7.5vw 9vh;display:flex;flex-direction:column;overflow:hidden;scroll-snap-align:start;background:#fff8f1">
+  <div style="display:flex;justify-content:space-between;padding-bottom:1.4vh;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35"><span data-r="left">02 — Campaign Overview</span><span data-r="right">ROSE / SS 2026</span></div>
+  <div style="position:relative;height:1.5px;background:#e8ddd7"><div data-r="line" data-t="1400" style="position:absolute;inset:0;background:#850e35"></div></div>
+  <div style="flex:1;display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:6vw;align-items:end;padding-top:6vh">
+    <div>
+      <div data-r="fade" data-d="200" style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35;margin-bottom:3vh">Key Idea</div>
+      <div style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(7vw,12.4vh);line-height:.95;letter-spacing:-0.02em;color:#850e35">
+        <div data-r="clip" data-d="200">Every Feeling</div>
+        <div data-r="clip" data-d="340" style="padding-left:8vw"><em>Deserves</em></div>
+        <div data-r="clip" data-d="480">a Flower.</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2.6vh;max-width:31vw;padding-bottom:1vh">
+      <div data-r="up" data-d="500" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(1.98vw,3.52vh);line-height:1.2;letter-spacing:-0.02em;color:#4a1019">Campaign Overview</div>
+      <p data-r="up" data-d="620" style="margin:0;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(15px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">This campaign was created for <strong style="font-weight:400;color:#850e35">ROSE</strong>, a flower brand that turns simple moments into meaningful memories through carefully designed floral arrangements.</p>
+      <p data-r="up" data-d="740" style="margin:0;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(15px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">The campaign focuses on presenting flowers as a language of emotions — expressing love, appreciation, celebration, gratitude, and thoughtful gestures.</p>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.4vw;border-top:1.5px solid #e8ddd7;padding-top:2vh;margin-top:1vh;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;color:#850e35;line-height:1.6">
+        <div data-r="up" data-d="900"><div style="color:#c58f94">Brand</div>ROSE</div>
+        <div data-r="up" data-d="1000"><div style="color:#c58f94">Format</div>Social Media</div>
+        <div data-r="up" data-d="1100"><div style="color:#c58f94">Season</div>SS 2026</div>
+      </div>
+    </div>
+  </div>
+  <div data-p="50" style="position:absolute;right:9vw;top:18vh;width:6vw;height:30vh">
+    <div data-sway style="position:absolute;inset:0;transform-origin:50% 100%">
+      <div data-r="grow" data-d="600" data-t="1800" style="position:absolute;left:50%;top:3.2vw;bottom:0;width:1px;background:#850e35"></div>
+      <div data-r="scale" data-d="1300" style="position:absolute;left:50%;top:0;width:3.2vw;height:3.2vw;margin-left:-1.6vw;box-sizing:border-box;border:1px solid #850e35;border-radius:50%"></div>
+      <div data-r="scale" data-d="1450" style="position:absolute;left:50%;top:.8vw;width:1.6vw;height:1.6vw;margin-left:-.8vw;box-sizing:border-box;border:1px solid #850e35;border-radius:50%"></div>
+      <div data-r="fade" data-d="1200" style="position:absolute;right:50%;top:50%;width:2.4vw;height:.9vw;box-sizing:border-box;border:1px solid #850e35;border-radius:100% 0 100% 0;transform-origin:right center;rotate:30deg"></div>
+    </div>
+  </div>
+</section>
+
+<section id="objective" data-sec data-screen-label="03 Objective" style="position:relative;min-height:100vh;box-sizing:border-box;padding:13vh 7.5vw 9vh;display:flex;flex-direction:column;overflow:hidden;scroll-snap-align:start;background:#fff8f1">
+  <div style="display:flex;justify-content:space-between;padding-bottom:1.4vh;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35"><span data-r="left">03 — Campaign Objective</span><span data-r="right">ROSE / SS 2026</span></div>
+  <div style="position:relative;height:1.5px;background:#e8ddd7"><div data-r="line" data-t="1400" style="position:absolute;inset:0;background:#850e35"></div></div>
+  <div style="flex:1;display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr);gap:5vw;align-items:center;padding-top:4vh">
+    <div data-p="50">
+      <div data-r="clip" data-t="1600" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(27vw,48vh);line-height:.8;letter-spacing:-0.04em;color:#850e35">03</div>
+    </div>
+    <div style="display:flex;flex-direction:column">
+      <div data-r="clip" data-d="150" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(4vw,7.1vh);line-height:.95;letter-spacing:-0.02em;color:#4a1019;margin-bottom:4vh">Campaign Objective</div>
+      <div style="display:flex;flex-direction:column;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(15px,min(1.1vw,1.95vh));line-height:1.45;color:#120b0c">
+        <div style="position:relative;display:grid;grid-template-columns:4vw minmax(0,1fr);padding:1.7vh 0"><div style="position:absolute;left:0;right:0;top:0;height:1px;background:#e8ddd7"><div data-r="line" data-d="250" style="position:absolute;inset:0;background:#c58f94"></div></div><span data-r="fade" data-d="300" style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#850e35">i.</span><span data-r="left" data-d="300">Build a recognizable and emotional visual identity for ROSE.</span></div>
+        <div style="position:relative;display:grid;grid-template-columns:4vw minmax(0,1fr);padding:1.7vh 0"><div style="position:absolute;left:0;right:0;top:0;height:1px;background:#e8ddd7"><div data-r="line" data-d="370" style="position:absolute;inset:0;background:#c58f94"></div></div><span data-r="fade" data-d="420" style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#850e35">ii.</span><span data-r="left" data-d="420">Make the brand feel more personal and relatable.</span></div>
+        <div style="position:relative;display:grid;grid-template-columns:4vw minmax(0,1fr);padding:1.7vh 0"><div style="position:absolute;left:0;right:0;top:0;height:1px;background:#e8ddd7"><div data-r="line" data-d="490" style="position:absolute;inset:0;background:#c58f94"></div></div><span data-r="fade" data-d="540" style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#850e35">iii.</span><span data-r="left" data-d="540">Show flowers in different emotional and social occasions.</span></div>
+        <div style="position:relative;display:grid;grid-template-columns:4vw minmax(0,1fr);padding:1.7vh 0"><div style="position:absolute;left:0;right:0;top:0;height:1px;background:#e8ddd7"><div data-r="line" data-d="610" style="position:absolute;inset:0;background:#c58f94"></div></div><span data-r="fade" data-d="660" style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#850e35">iv.</span><span data-r="left" data-d="660">Create visually engaging social media content.</span></div>
+        <div style="position:relative;display:grid;grid-template-columns:4vw minmax(0,1fr);padding:1.7vh 0;border-bottom:1px solid #e8ddd7"><div style="position:absolute;left:0;right:0;top:0;height:1px;background:#e8ddd7"><div data-r="line" data-d="730" style="position:absolute;inset:0;background:#c58f94"></div></div><span data-r="fade" data-d="780" style="font-family:'Cormorant Garamond',serif;font-style:italic;color:#850e35">v.</span><span data-r="left" data-d="780">Position ROSE as a thoughtful choice for meaningful moments.</span></div>
+      </div>
+      <div style="margin-top:5vh;display:flex;flex-direction:column;gap:1.4vh">
+        <div data-r="fade" data-d="900" style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35">Core Statement</div>
+        <div data-r="clip" data-d="1000" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-style:italic;font-size:min(3.23vw,5.74vh);line-height:1;letter-spacing:-0.02em;color:#850e35">Turn the Flower Into an Emotional Experience.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="audience" data-sec data-screen-label="04 Audience" style="position:relative;min-height:100vh;display:grid;grid-template-columns:80vh minmax(0,1fr);overflow:hidden;scroll-snap-align:start;background:#fff8f1">
+  <div style="position:relative;overflow:hidden;align-self:start;height:100vh">
+    <div style="position:absolute;top:0;left:0;width:100%;aspect-ratio:4/5">
+      <div data-r="imgL" data-t="1700" data-cursor="view" style="position:absolute;inset:0;overflow:hidden">
+        <div data-inner style="position:absolute;inset:0"><image-slot id="audience-lifestyle" shape="rect" placeholder="Lifestyle image — young adults, gifting moment"></image-slot></div>
+      </div>
+    </div>
+  </div>
+  <div style="box-sizing:border-box;padding:13vh 7.5vw 9vh 5vw;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;padding-bottom:1.4vh;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35"><span data-r="left">04 — Target Audience</span><span data-r="right">ROSE / SS 2026</span></div>
+    <div style="position:relative;height:1.5px;background:#e8ddd7"><div data-r="line" data-t="1400" style="position:absolute;inset:0;background:#850e35"></div></div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:4.4vh;padding-top:3vh">
+      <div data-r="clip" data-d="200" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(5.4vw,9.6vh);line-height:.95;letter-spacing:-0.02em;color:#850e35">Target Audience</div>
+      <div style="display:flex;flex-direction:column;gap:1.4vh">
+        <div data-r="fade" data-d="400" style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35">Primary Audience</div>
+        <p data-r="up" data-d="450" style="margin:0;max-width:36vw;font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(1.9vw,3.4vh);line-height:1.2;letter-spacing:-0.01em;color:#4a1019;text-wrap:pretty">Young adults who use flowers as a way to express emotions, celebrate special moments, or surprise someone they care about.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1.4vh">
+        <div data-r="fade" data-d="600" style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35">Audience Interests</div>
+        <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:3vw;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(15px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c">
+          <div data-r="up" data-d="650" style="border-top:1px solid #e8ddd7;padding:1.2vh 0">Romantic gestures</div>
+          <div data-r="up" data-d="720" style="border-top:1px solid #e8ddd7;padding:1.2vh 0">Birthdays &amp; celebrations</div>
+          <div data-r="up" data-d="790" style="border-top:1px solid #e8ddd7;padding:1.2vh 0">Gifts &amp; surprises</div>
+          <div data-r="up" data-d="860" style="border-top:1px solid #e8ddd7;padding:1.2vh 0">Weddings &amp; special occasions</div>
+          <div data-r="up" data-d="930" style="border-top:1px solid #e8ddd7;border-bottom:1px solid #e8ddd7;padding:1.2vh 0">Elegant lifestyle aesthetics</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1.4vh">
+        <div data-r="fade" data-d="1000" style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35">Communication Style</div>
+        <div data-r="track" data-d="1050" data-t="1600" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-style:italic;font-size:min(2.3vw,4.1vh);line-height:1.1;letter-spacing:-0.02em;color:#850e35">Emotional · Elegant · Warm · Modern · Personal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="concept" data-sec data-screen-label="05 Creative Concept" style="position:relative;height:100vh;min-height:100vh;box-sizing:border-box;padding:13vh 7.5vw 0;overflow:hidden;scroll-snap-align:start;background:#fff8f1">
+  <div style="display:flex;justify-content:space-between;padding-bottom:1.4vh;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35"><span data-r="left">05 — Creative Concept</span><span data-r="right">ROSE / SS 2026</span></div>
+  <div style="position:relative;height:1.5px;background:#e8ddd7"><div data-r="line" data-t="1400" style="position:absolute;inset:0;background:#850e35"></div></div>
+  <div data-px="140" style="position:absolute;left:6.5vw;top:19vh;z-index:1;white-space:nowrap">
+    <div data-r="clip" data-d="150" data-t="1500" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(12vw,21.3vh);line-height:.95;letter-spacing:-0.03em;color:#850e35">Flowers Speak</div>
+  </div>
+  <div data-p="70" style="position:absolute;left:calc(50% - 23.2vh);top:16vh;height:58vh;aspect-ratio:4/5;z-index:2">
+    <div data-r="img" data-d="450" data-t="1700" data-cursor="view" style="position:absolute;inset:0;overflow:hidden">
+      <div data-inner style="position:absolute;inset:0"><image-slot id="concept-hero" shape="rect" placeholder="Campaign image — a confession, a gesture"></image-slot></div>
+    </div>
+  </div>
+  <div data-px="-140" style="position:absolute;right:6.5vw;top:44vh;z-index:3;white-space:nowrap">
+    <div data-r="clip" data-d="650" data-t="1500" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-style:italic;font-size:min(12vw,21.3vh);line-height:.95;letter-spacing:-0.03em;color:#4a1019">What Words Can't.</div>
+  </div>
+  <div style="position:absolute;left:7.5vw;right:7.5vw;bottom:9vh;display:flex;justify-content:space-between;align-items:flex-end;gap:6vw">
+    <p data-r="up" data-d="900" style="margin:0;max-width:27vw;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">The campaign treats flowers as a form of communication. Instead of simply showcasing bouquets, each visual tells a small emotional story — a surprise, a confession, a celebration, a memory, or a simple gesture of love.</p>
+    <div style="display:flex;flex-direction:column;gap:1.2vh;align-items:flex-end;text-align:right">
+      <div data-r="fade" data-d="1000" style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35">Concept Line</div>
+      <div data-r="right" data-d="1100" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(1.98vw,3.52vh);line-height:1.15;letter-spacing:-0.02em;color:#850e35">Don't just send flowers.<br><em>Send a feeling.</em></div>
+    </div>
+  </div>
+</section>
+
+<section id="direction" data-sec data-screen-label="06 Visual Direction" style="position:relative;min-height:100vh;box-sizing:border-box;padding:13vh 7.5vw 9vh;display:flex;flex-direction:column;overflow:hidden;scroll-snap-align:start;background:#fff8f1">
+  <div style="display:flex;justify-content:space-between;padding-bottom:1.4vh;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35"><span data-r="left">06 — Visual Direction</span><span data-r="right">ROSE / SS 2026</span></div>
+  <div style="position:relative;height:1.5px;background:#e8ddd7"><div data-r="line" data-t="1400" style="position:absolute;inset:0;background:#850e35"></div></div>
+  <div data-r="clip" data-d="150" style="margin-top:5vh;font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(5.4vw,9.6vh);line-height:.95;letter-spacing:-0.02em;color:#850e35">Visual Direction</div>
+  <div style="flex:1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:5vh">
+    <div data-r="up" data-d="300" style="display:flex;flex-direction:column;gap:1.6vh;padding:0 1.8vw 0 0">
+      <div style="height:30vh;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:.6vw">
+        <div style="background:#850e35;display:flex;align-items:flex-end;padding:.8vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(10px,.62vw);letter-spacing:.14em;text-transform:uppercase;color:#fff8f1">#850E35</div>
+        <div style="background:#ee6983;display:flex;align-items:flex-end;padding:.8vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(10px,.62vw);letter-spacing:.14em;text-transform:uppercase;color:#4a1019">#EE6983</div>
+        <div style="background:#ffc4c4;display:flex;align-items:flex-end;padding:.8vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(10px,.62vw);letter-spacing:.14em;text-transform:uppercase;color:#850e35">#FFC4C4</div>
+        <div style="background:#fcf5ee;border:1px solid #e8ddd7;display:flex;align-items:flex-end;padding:.8vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(10px,.62vw);letter-spacing:.14em;text-transform:uppercase;color:#850e35">#FCF5EE</div>
+      </div>
+      <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:min(3.23vw,5.74vh);line-height:1;color:#850e35">01</div>
+      <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35">Color</div>
+      <p style="margin:0;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">Romantic palette built around Burgundy · Deep Wine · Dusty Rose · Warm Cream.</p>
+    </div>
+    <div data-r="up" data-d="420" style="display:flex;flex-direction:column;gap:1.6vh;padding:0 1.8vw;border-left:1px solid #e8ddd7">
+      <div data-card data-cursor="view" style="position:relative;height:30vh;aspect-ratio:4/5;align-self:flex-start;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="direction-light" shape="rect" placeholder="Soft diffused light"></image-slot></div></div>
+      <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:min(3.23vw,5.74vh);line-height:1;color:#850e35">02</div>
+      <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35">Lighting</div>
+      <p style="margin:0;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">Soft, diffused lighting creates an emotional and luxurious atmosphere.</p>
+    </div>
+    <div data-r="up" data-d="540" style="display:flex;flex-direction:column;gap:1.6vh;padding:0 1.8vw;border-left:1px solid #e8ddd7">
+      <div data-card data-cursor="view" style="position:relative;height:30vh;aspect-ratio:4/5;align-self:flex-start;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="direction-photo" shape="rect" placeholder="Lifestyle photography"></image-slot></div></div>
+      <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:min(3.23vw,5.74vh);line-height:1;color:#850e35">03</div>
+      <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35">Photography</div>
+      <p style="margin:0;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">Floral arrangements are presented in realistic lifestyle situations rather than isolated product shots.</p>
+    </div>
+    <div data-r="up" data-d="660" style="display:flex;flex-direction:column;gap:1.6vh;padding:0 0 0 1.8vw;border-left:1px solid #e8ddd7">
+      <div style="height:30vh;display:flex;flex-direction:column;justify-content:center;font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-style:italic;font-size:min(2.1vw,3.7vh);line-height:1.12;letter-spacing:-0.02em;color:#850e35">
+        <span>Romantic</span><span style="padding-left:2vw">Elegant</span><span>Dreamy</span><span style="padding-left:3vw">Warm</span><span style="padding-left:1vw">Emotional</span>
+      </div>
+      <div style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:min(3.23vw,5.74vh);line-height:1;color:#850e35">04</div>
+      <div style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35">Mood</div>
+      <p style="margin:0;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">Romantic · Elegant · Dreamy · Warm · Emotional</p>
+    </div>
+  </div>
+</section>
+
+<section id="pillars" data-sec data-screen-label="07 Content Pillars" style="position:relative;min-height:100vh;box-sizing:border-box;padding:13vh 7.5vw 9vh;display:flex;flex-direction:column;overflow:hidden;scroll-snap-align:start;background:#fff8f1">
+  <div style="display:flex;justify-content:space-between;padding-bottom:1.4vh;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35"><span data-r="left">07 — Content Pillars</span><span data-r="right">Hover to open</span></div>
+  <div style="position:relative;height:1.5px;background:#e8ddd7"><div data-r="line" data-t="1400" style="position:absolute;inset:0;background:#850e35"></div></div>
+  <div data-r="clip" data-d="150" style="margin-top:5vh;font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(5.4vw,9.6vh);line-height:.95;letter-spacing:-0.02em;color:#850e35">Content Pillars</div>
+  <div style="flex:1;display:flex;margin-top:5vh;min-height:0">
+    <div data-r="up" data-d="250" data-card data-cursor="view" style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:1.6vh;padding-right:1.4vw;transition:flex-grow 900ms cubic-bezier(.16,1,.3,1)" style-hover="flex-grow:2.2">
+      <div style="position:relative;height:30vh;aspect-ratio:4/5;align-self:flex-start;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="pillar-romance" shape="rect" placeholder="Romance"></image-slot></div></div>
+      <div style="display:flex;align-items:baseline;gap:1vw;border-top:1px solid #e8ddd7;padding-top:1.4vh"><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:min(3.23vw,5.74vh);line-height:1;color:#c58f94">01</span><span data-lbl style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:min(1.98vw,3.52vh);line-height:1;color:#120b0c;transition:color 300ms ease">Romance</span></div>
+      <p style="margin:0;min-height:5vh;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.88vw,1.56vh));line-height:1.45;color:#120b0c">Flowers as a way to express love and affection.</p>
+    </div>
+    <div data-r="up" data-d="350" data-card data-cursor="view" style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:1.6vh;padding:0 1.4vw;border-left:1px solid #e8ddd7;transition:flex-grow 900ms cubic-bezier(.16,1,.3,1)" style-hover="flex-grow:2.2">
+      <div style="position:relative;height:30vh;aspect-ratio:4/5;align-self:flex-start;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="pillar-surprise" shape="rect" placeholder="Surprise"></image-slot></div></div>
+      <div style="display:flex;align-items:baseline;gap:1vw;border-top:1px solid #e8ddd7;padding-top:1.4vh"><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:min(3.23vw,5.74vh);line-height:1;color:#c58f94">02</span><span data-lbl style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:min(1.98vw,3.52vh);line-height:1;color:#120b0c;transition:color 300ms ease">Surprise</span></div>
+      <p style="margin:0;min-height:5vh;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.88vw,1.56vh));line-height:1.45;color:#120b0c">Unexpected floral gestures that create memorable moments.</p>
+    </div>
+    <div data-r="up" data-d="450" data-card data-cursor="view" style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:1.6vh;padding:0 1.4vw;border-left:1px solid #e8ddd7;transition:flex-grow 900ms cubic-bezier(.16,1,.3,1)" style-hover="flex-grow:2.2">
+      <div style="position:relative;height:30vh;aspect-ratio:4/5;align-self:flex-start;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="pillar-celebration" shape="rect" placeholder="Celebration"></image-slot></div></div>
+      <div style="display:flex;align-items:baseline;gap:1vw;border-top:1px solid #e8ddd7;padding-top:1.4vh"><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:min(3.23vw,5.74vh);line-height:1;color:#c58f94">03</span><span data-lbl style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:min(1.98vw,3.52vh);line-height:1;color:#120b0c;transition:color 300ms ease">Celebration</span></div>
+      <p style="margin:0;min-height:5vh;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.88vw,1.56vh));line-height:1.45;color:#120b0c">Flowers as part of birthdays, weddings and special occasions.</p>
+    </div>
+    <div data-r="up" data-d="550" data-card data-cursor="view" style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:1.6vh;padding:0 1.4vw;border-left:1px solid #e8ddd7;transition:flex-grow 900ms cubic-bezier(.16,1,.3,1)" style-hover="flex-grow:2.2">
+      <div style="position:relative;height:30vh;aspect-ratio:4/5;align-self:flex-start;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="pillar-memories" shape="rect" placeholder="Memories"></image-slot></div></div>
+      <div style="display:flex;align-items:baseline;gap:1vw;border-top:1px solid #e8ddd7;padding-top:1.4vh"><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:min(3.23vw,5.74vh);line-height:1;color:#c58f94">04</span><span data-lbl style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:min(1.98vw,3.52vh);line-height:1;color:#120b0c;transition:color 300ms ease">Memories</span></div>
+      <p style="margin:0;min-height:5vh;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.88vw,1.56vh));line-height:1.45;color:#120b0c">Connecting flowers with moments people want to remember.</p>
+    </div>
+    <div data-r="up" data-d="650" data-card data-cursor="view" style="flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:1.6vh;padding-left:1.4vw;border-left:1px solid #e8ddd7;transition:flex-grow 900ms cubic-bezier(.16,1,.3,1)" style-hover="flex-grow:2.2">
+      <div style="position:relative;height:30vh;aspect-ratio:4/5;align-self:flex-start;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="pillar-gifting" shape="rect" placeholder="Gifting"></image-slot></div></div>
+      <div style="display:flex;align-items:baseline;gap:1vw;border-top:1px solid #e8ddd7;padding-top:1.4vh"><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:min(3.23vw,5.74vh);line-height:1;color:#c58f94">05</span><span data-lbl style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:min(1.98vw,3.52vh);line-height:1;color:#120b0c;transition:color 300ms ease">Gifting</span></div>
+      <p style="margin:0;min-height:5vh;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.88vw,1.56vh));line-height:1.45;color:#120b0c">Presenting ROSE as an easy and meaningful gifting choice.</p>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" data-sec data-screen-label="08 Campaign in Action" style="position:relative;height:100vh;min-height:100vh;box-sizing:border-box;padding:13vh 7.5vw 0;overflow:hidden;scroll-snap-align:start;background:#fff8f1">
+  <div style="display:flex;justify-content:space-between;padding-bottom:1.4vh;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35"><span data-r="left">08 — The Campaign in Action</span><span data-r="right">Social Media Visuals</span></div>
+  <div style="position:relative;height:1.5px;background:#e8ddd7"><div data-r="line" data-t="1400" style="position:absolute;inset:0;background:#850e35"></div></div>
+  <div style="position:absolute;left:7.5vw;top:21vh;width:25vw;display:flex;flex-direction:column;gap:3vh;z-index:3">
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(4.6vw,8.2vh);line-height:.95;letter-spacing:-0.02em;color:#850e35"><div data-r="clip" data-d="150">The Campaign</div><div data-r="clip" data-d="280"><em>in Action</em></div></div>
+    <p data-r="up" data-d="450" style="margin:0;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">A collection of social media visuals designed around different emotional occasions while maintaining one consistent visual language.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:.6vw">
+      <span data-r="up" data-d="550" style="border:1.5px solid #850e35;border-radius:60px;padding:.8vh 1.2vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;color:#850e35">Romance</span>
+      <span data-r="up" data-d="610" style="border:1.5px solid #850e35;border-radius:60px;padding:.8vh 1.2vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;color:#850e35">Surprise</span>
+      <span data-r="up" data-d="670" style="border:1.5px solid #850e35;border-radius:60px;padding:.8vh 1.2vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;color:#850e35">Celebration</span>
+      <span data-r="up" data-d="730" style="border:1.5px solid #850e35;border-radius:60px;padding:.8vh 1.2vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;color:#850e35">Memories</span>
+      <span data-r="up" data-d="790" style="border:1.5px solid #850e35;border-radius:60px;padding:.8vh 1.2vw;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;color:#850e35">Gifting</span>
+    </div>
+  </div>
+  <div data-p="30" data-card data-cursor="view" style="position:absolute;left:36vw;top:19vh;height:56vh;aspect-ratio:4/5;z-index:1">
+    <div data-r="img" data-d="300" style="position:absolute;inset:0;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="gallery-1" shape="rect" placeholder="Post — Romance (large)"></image-slot></div></div>
+    <div data-frame style="position:absolute;inset:0;border:1.5px solid #850e35;opacity:0;transition:opacity 300ms ease;pointer-events:none"></div>
+    <div data-cap style="position:absolute;left:0;top:calc(100% + 1.2vh);opacity:0;transform:translateY(8px);font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35;white-space:nowrap">01 — Romance</div>
+  </div>
+  <div data-p="80" data-card data-cursor="view" style="position:absolute;left:63vw;top:24vh;height:32vh;aspect-ratio:4/5;z-index:2">
+    <div data-r="img" data-d="480" style="position:absolute;inset:0;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="gallery-2" shape="rect" placeholder="Post — Surprise"></image-slot></div></div>
+    <div data-frame style="position:absolute;inset:0;border:1.5px solid #850e35;opacity:0;transition:opacity 300ms ease;pointer-events:none"></div>
+    <div data-cap style="position:absolute;left:0;top:calc(100% + 1.2vh);opacity:0;transform:translateY(8px);font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35;white-space:nowrap">02 — Surprise</div>
+  </div>
+  <div data-p="45" data-card data-cursor="view" style="position:absolute;left:79vw;top:17vh;height:30vh;aspect-ratio:4/5;z-index:1">
+    <div data-r="imgR" data-d="600" style="position:absolute;inset:0;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="gallery-3" shape="rect" placeholder="Post — Celebration"></image-slot></div></div>
+    <div data-frame style="position:absolute;inset:0;border:1.5px solid #850e35;opacity:0;transition:opacity 300ms ease;pointer-events:none"></div>
+    <div data-cap style="position:absolute;left:0;top:calc(100% + 1.2vh);opacity:0;transform:translateY(8px);font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35;white-space:nowrap">03 — Celebration</div>
+  </div>
+  <div data-p="110" data-card data-cursor="view" style="position:absolute;left:81vw;top:55vh;height:22vh;aspect-ratio:4/5;z-index:2">
+    <div data-r="img" data-d="750" style="position:absolute;inset:0;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="gallery-4" shape="rect" placeholder="Post — Memories"></image-slot></div></div>
+    <div data-frame style="position:absolute;inset:0;border:1.5px solid #850e35;opacity:0;transition:opacity 300ms ease;pointer-events:none"></div>
+    <div data-cap style="position:absolute;left:0;top:calc(100% + 1.2vh);opacity:0;transform:translateY(8px);font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35;white-space:nowrap">04 — Memories</div>
+  </div>
+  <div data-p="60" data-card data-cursor="view" style="position:absolute;left:57vw;top:64vh;height:24vh;aspect-ratio:4/5;z-index:3">
+    <div data-r="imgL" data-d="900" style="position:absolute;inset:0;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="gallery-5" shape="rect" placeholder="Post — Gifting"></image-slot></div></div>
+    <div data-frame style="position:absolute;inset:0;border:1.5px solid #850e35;opacity:0;transition:opacity 300ms ease;pointer-events:none"></div>
+    <div data-cap style="position:absolute;left:0;bottom:calc(100% + 1.2vh);opacity:0;transform:translateY(8px);font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35;white-space:nowrap">05 — Gifting</div>
+  </div>
+  <div data-p="20" data-card data-cursor="view" style="position:absolute;left:7.5vw;top:70vh;height:22vh;aspect-ratio:4/5;z-index:1">
+    <div data-r="img" data-d="1000" style="position:absolute;inset:0;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="gallery-6" shape="rect" placeholder="Post — detail"></image-slot></div></div>
+    <div data-frame style="position:absolute;inset:0;border:1.5px solid #850e35;opacity:0;transition:opacity 300ms ease;pointer-events:none"></div>
+    <div data-cap style="position:absolute;left:calc(100% + 1vw);bottom:0;opacity:0;transform:translateY(8px);font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35;white-space:nowrap">06 — Detail</div>
+  </div>
+</section>
+
+<section id="exec1" data-sec data-screen-label="09 Morning Gesture" style="position:relative;height:100vh;min-height:100vh;overflow:hidden;scroll-snap-align:start;background:#fff8f1">
+  <div style="position:absolute;right:0;top:0;bottom:0;width:80vh;overflow:hidden">
+    <div style="position:absolute;inset:0">
+      <div data-r="imgR" data-t="2000" data-cursor="view" style="position:absolute;inset:0;overflow:hidden">
+        <div data-inner style="position:absolute;inset:0"><div data-drift style="position:absolute;inset:0"><image-slot id="exec1-morning" shape="rect" placeholder="Morning scene — bouquet, breakfast, sunlight, hands"></image-slot></div></div>
+        <div data-light style="position:absolute;top:-10%;bottom:-10%;left:0;width:22%;background:#fff8f1;opacity:.14;pointer-events:none;transform:translateX(-120%) skewX(-18deg)"></div>
+      </div>
+    </div>
+  </div>
+  <div style="position:absolute;left:7.5vw;top:13vh;bottom:9vh;width:34vw;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;padding-bottom:1.4vh;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35"><span data-r="left">09 — Execution 01</span><span data-r="right">Romance</span></div>
+    <div style="position:relative;height:1.5px;background:#e8ddd7"><div data-r="line" data-t="1400" style="position:absolute;inset:0;background:#850e35"></div></div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:4vh">
+      <div data-r="clip" data-d="200" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(4.6vw,8.2vh);line-height:.95;letter-spacing:-0.02em;color:#850e35">Morning<br><em>Gesture</em></div>
+      <div style="overflow:hidden;padding:1vh 0"><div data-r="up" data-d="700" data-t="1400" dir="rtl" style="font-family:'Amira Typo','Alexandria',sans-serif;font-weight:400;font-size:min(3.4vw,6vh);line-height:1.45;color:#4a1019;text-align:right">صباح الحب بيبدأ بالورد</div></div>
+      <div style="display:flex;flex-direction:column;gap:1.2vh;border-top:1px solid #e8ddd7;padding-top:2.4vh">
+        <div data-r="fade" data-d="900" style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35">Idea</div>
+        <p data-r="up" data-d="950" style="margin:0;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(15px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">Positioning flowers as a simple morning gesture that can instantly make someone's day more special.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="exec2" data-sec data-screen-label="10 Unexpected Surprise" style="position:relative;height:100vh;min-height:100vh;overflow:hidden;scroll-snap-align:start;background:#fff8f1">
+  <div data-p="40" style="position:absolute;left:7.5vw;top:13vh;height:76vh;aspect-ratio:4/5">
+    <div data-r="img" data-t="1500" data-cursor="view" style="position:absolute;inset:0;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="exec2-surprise" shape="rect" placeholder="The surprise — bouquet as catalyst"></image-slot></div></div>
+  </div>
+  <div data-p="110" style="position:absolute;left:36vw;top:50vh;height:34vh;aspect-ratio:4/5;z-index:2">
+    <div data-r="scale" data-d="1100" data-t="1200" data-cursor="view" style="position:absolute;inset:0;overflow:hidden;outline:1vw solid #fff8f1"><div data-inner style="position:absolute;inset:0"><image-slot id="exec2-reaction" shape="rect" placeholder="Reaction detail"></image-slot></div></div>
+  </div>
+  <div style="position:absolute;left:54vw;right:7.5vw;top:13vh;bottom:9vh;display:flex;flex-direction:column">
+    <div style="display:flex;justify-content:space-between;padding-bottom:1.4vh;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35"><span data-r="left">10 — Execution 02</span><span data-r="right">Surprise</span></div>
+    <div style="position:relative;height:1.5px;background:#e8ddd7"><div data-r="line" data-t="1400" style="position:absolute;inset:0;background:#850e35"></div></div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:4vh">
+      <div data-r="clip" data-d="200" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(4.6vw,8.2vh);line-height:.95;letter-spacing:-0.02em;color:#850e35">The Unexpected<br><em>Surprise</em></div>
+      <div data-r="slide" data-d="500" data-t="1600" dir="rtl" style="font-family:'Amira Typo','Alexandria',sans-serif;font-weight:400;font-size:min(5.4vw,9.6vh);line-height:1.35;color:#4a1019;text-align:right">خدها مفاجأة غير</div>
+      <div style="display:flex;flex-direction:column;gap:1.2vh;border-top:1px solid #e8ddd7;padding-top:2.4vh;max-width:30vw">
+        <div data-r="fade" data-d="900" style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35">Idea</div>
+        <p data-r="up" data-d="950" style="margin:0;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(15px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">Turning an ordinary moment into an unexpected emotional experience through flowers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="exec3" data-sec data-screen-label="11 Story in Every Flower" style="position:relative;height:100vh;min-height:100vh;box-sizing:border-box;padding:13vh 7.5vw 0;overflow:hidden;scroll-snap-align:start;background:#fff8f1">
+  <div style="display:flex;justify-content:space-between;padding-bottom:1.4vh;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35"><span data-r="left">11 — Execution 03</span><span data-r="right">Memories</span></div>
+  <div style="position:relative;height:1.5px;background:#e8ddd7"><div data-r="line" data-t="1400" style="position:absolute;inset:0;background:#850e35"></div></div>
+  <div dir="rtl" style="position:absolute;left:0;right:0;top:19vh;display:flex;justify-content:center;gap:1.6vw;z-index:3;font-family:'Amira Typo','Alexandria',sans-serif;font-weight:400;font-size:min(5.6vw,10vh);line-height:1.4;color:#4a1019;pointer-events:none">
+    <span data-r="clip" data-d="300" data-t="1400">كل</span>
+    <span data-r="clip" data-d="550" data-t="1400">وردة</span>
+    <span data-r="clip" data-d="800" data-t="1400">لها</span>
+    <span data-r="clip" data-d="1050" data-t="1400" style="color:#850e35">حكاية</span>
+  </div>
+  <div data-p="90" style="position:absolute;left:calc(50% - 21.6vh);top:40vh;height:54vh;aspect-ratio:4/5;z-index:1">
+    <div data-r="img" data-d="400" data-t="1800" data-cursor="view" style="position:absolute;inset:0;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="exec3-story" shape="rect" placeholder="Close-up flowers, hands, ribbon"></image-slot></div></div>
+  </div>
+  <div data-p="40" style="position:absolute;left:24vw;top:40vh;height:22vh;aspect-ratio:4/5;z-index:1">
+    <div data-r="imgL" data-d="800" data-cursor="view" style="position:absolute;inset:0;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="exec3-note" shape="rect" placeholder="Handwritten note"></image-slot></div></div>
+  </div>
+  <div data-p="140" style="position:absolute;right:7.5vw;top:46vh;height:36vh;aspect-ratio:4/5;z-index:1">
+    <div data-r="imgR" data-d="950" data-cursor="view" style="position:absolute;inset:0;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="exec3-photo" shape="rect" placeholder="Old photographs, keepsakes"></image-slot></div></div>
+  </div>
+  <div style="position:absolute;left:7.5vw;bottom:9vh;width:22vw;display:flex;flex-direction:column;gap:2vh;z-index:2">
+    <div data-r="clip" data-d="600" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(3.23vw,5.74vh);line-height:1;letter-spacing:-0.02em;color:#850e35">A Story in<br><em>Every Flower</em></div>
+    <p data-r="up" data-d="1200" style="margin:0;border-top:1px solid #e8ddd7;padding-top:2vh;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">Connecting every bouquet with a personal memory, emotion, or story.</p>
+  </div>
+  <div style="position:absolute;inset:0;pointer-events:none;z-index:4;overflow:hidden">
+    <div data-petal style="position:absolute;top:0;left:14%;width:1vw;height:.6vw;background:#c58f94;border-radius:0 100% 0 100%;opacity:0"></div>
+    <div data-petal style="position:absolute;top:0;left:31%;width:.8vw;height:.5vw;background:#9b3444;border-radius:0 100% 0 100%;opacity:0"></div>
+    <div data-petal style="position:absolute;top:0;left:47%;width:1.1vw;height:.65vw;background:#c58f94;border-radius:0 100% 0 100%;opacity:0"></div>
+    <div data-petal style="position:absolute;top:0;left:63%;width:.7vw;height:.45vw;background:#850e35;border-radius:0 100% 0 100%;opacity:0"></div>
+    <div data-petal style="position:absolute;top:0;left:78%;width:1vw;height:.6vw;background:#c58f94;border-radius:0 100% 0 100%;opacity:0"></div>
+    <div data-petal style="position:absolute;top:0;left:90%;width:.8vw;height:.5vw;background:#9b3444;border-radius:0 100% 0 100%;opacity:0"></div>
+  </div>
+</section>
+
+<section id="exec4" data-sec data-screen-label="12 Emotional Gift" style="position:relative;min-height:100vh;box-sizing:border-box;padding:13vh 7.5vw 9vh;display:flex;flex-direction:column;overflow:hidden;scroll-snap-align:start;background:#fff8f1">
+  <div style="display:flex;justify-content:space-between;padding-bottom:1.4vh;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35"><span data-r="left">12 — Execution 04</span><span data-r="right">Gifting</span></div>
+  <div style="position:relative;height:1.5px;background:#e8ddd7"><div data-r="line" data-t="1400" style="position:absolute;inset:0;background:#850e35"></div></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:5vw;align-items:end;margin-top:4.5vh">
+    <div style="display:flex;flex-direction:column;gap:2.4vh">
+      <div data-r="clip" data-d="150" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(4.6vw,8.2vh);line-height:.95;letter-spacing:-0.02em;color:#850e35">The Emotional <em>Gift</em></div>
+      <p data-r="up" data-d="350" style="margin:0;max-width:30vw;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">Showing that the perfect bouquet can be chosen according to the personality and taste of the person receiving it.</p>
+    </div>
+    <div data-r="slide" data-d="300" data-t="1500" dir="rtl" style="font-family:'Amira Typo','Alexandria',sans-serif;font-weight:400;font-size:min(4.6vw,8.2vh);line-height:1.35;color:#4a1019;text-align:left">هاتلك... على ذوقك</div>
+  </div>
+  <div style="flex:1;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:1.4vw;margin-top:5vh;min-height:0;align-items:start">
+    <div data-r="up" data-d="500" data-card data-cursor="view" style="display:flex;flex-direction:column;gap:1.4vh"><div style="position:relative;width:100%;aspect-ratio:4/5;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="gift-romantic" shape="rect" placeholder="Romantic bouquet"></image-slot></div></div><span data-lbl style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.83vw,1.48vh));letter-spacing:.2em;color:#120b0c;transition:color 300ms ease">ROMANTIC</span></div>
+    <div data-r="up" data-d="650" data-card data-cursor="view" style="display:flex;flex-direction:column;gap:1.4vh;margin-top:5vh"><div style="position:relative;width:100%;aspect-ratio:4/5;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="gift-minimal" shape="rect" placeholder="Minimal bouquet"></image-slot></div></div><span data-lbl style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.83vw,1.48vh));letter-spacing:.2em;color:#120b0c;transition:color 300ms ease">MINIMAL</span></div>
+    <div data-r="up" data-d="800" data-card data-cursor="view" style="display:flex;flex-direction:column;gap:1.4vh;margin-top:1.5vh"><div style="position:relative;width:100%;aspect-ratio:4/5;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="gift-bold" shape="rect" placeholder="Bold bouquet"></image-slot></div></div><span data-lbl style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.83vw,1.48vh));letter-spacing:.2em;color:#120b0c;transition:color 300ms ease">BOLD</span></div>
+    <div data-r="up" data-d="950" data-card data-cursor="view" style="display:flex;flex-direction:column;gap:1.4vh;margin-top:6.5vh"><div style="position:relative;width:100%;aspect-ratio:4/5;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="gift-soft" shape="rect" placeholder="Soft bouquet"></image-slot></div></div><span data-lbl style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.83vw,1.48vh));letter-spacing:.2em;color:#120b0c;transition:color 300ms ease">SOFT</span></div>
+    <div data-r="up" data-d="1100" data-card data-cursor="view" style="display:flex;flex-direction:column;gap:1.4vh;margin-top:2.5vh"><div style="position:relative;width:100%;aspect-ratio:4/5;overflow:hidden"><div data-inner style="position:absolute;inset:0"><image-slot id="gift-elegant" shape="rect" placeholder="Elegant bouquet"></image-slot></div></div><span data-lbl style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.83vw,1.48vh));letter-spacing:.2em;color:#120b0c;transition:color 300ms ease">ELEGANT</span></div>
+  </div>
+</section>
+
+<section id="system" data-sec data-screen-label="13 Typography System" style="position:relative;min-height:100vh;box-sizing:border-box;padding:13vh 7.5vw 9vh;display:flex;flex-direction:column;overflow:hidden;scroll-snap-align:start;background:#fff8f1">
+  <div style="display:flex;justify-content:space-between;padding-bottom:1.4vh;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35"><span data-r="left">13 — Typography &amp; Design System</span><span data-r="right">ROSE / SS 2026</span></div>
+  <div style="position:relative;height:1.5px;background:#e8ddd7"><div data-r="line" data-t="1400" style="position:absolute;inset:0;background:#850e35"></div></div>
+  <div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:5vw;align-items:end;margin-top:4.5vh">
+    <div data-r="clip" data-d="150" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(4.6vw,8.2vh);line-height:.95;letter-spacing:-0.02em;color:#850e35">Typography &amp;<br><em>Design System</em></div>
+    <div data-r="up" data-d="300" style="font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(15px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c">Arabic typography balances:<br><span style="font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;font-size:min(1.98vw,3.52vh);line-height:1.3;color:#850e35">Elegance · Readability · Emotional expression · Modernity</span></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:4vh;border-top:1px solid #e8ddd7;border-bottom:1px solid #e8ddd7">
+    <div data-r="up" data-d="400" style="padding:2.4vh 2vw 2.4vh 0;display:flex;justify-content:space-between;align-items:flex-end"><span style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:min(9vw,16vh);line-height:.9;color:#850e35">Aa</span><span style="text-align:right;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;color:#850e35;line-height:1.6">Editorial Serif<br><span style="color:#c58f94">Display · 300</span></span></div>
+    <div data-r="up" data-d="520" style="padding:2.4vh 2vw;border-left:1px solid #e8ddd7;display:flex;justify-content:space-between;align-items:flex-end"><span style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:min(7.4vw,13vh);line-height:.9;letter-spacing:-0.04em;color:#120b0c">Aa</span><span style="text-align:right;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;color:#850e35;line-height:1.6">Grotesk<br><span style="color:#c58f94">Text · 300 / 400</span></span></div>
+    <div data-r="up" data-d="640" style="padding:2.4vh 0 2.4vh 2vw;border-left:1px solid #e8ddd7;display:flex;justify-content:space-between;align-items:flex-end"><span dir="rtl" style="font-family:'Amira Typo','Alexandria',sans-serif;font-weight:400;font-size:min(6vw,10.6vh);line-height:1.1;color:#4a1019">ورد</span><span style="text-align:right;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.14em;text-transform:uppercase;color:#850e35;line-height:1.6">Arabic Headline<br><span style="color:#c58f94">Amira Typo</span></span></div>
+  </div>
+  <div style="flex:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2vw;margin-top:4vh;align-content:start">
+    <div data-r="up" data-d="760" style="display:flex;flex-direction:column;gap:1.2vh"><div style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35">Headline</div><p style="margin:0;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">Bold Arabic typography establishes the emotional message as the focal point.</p></div>
+    <div data-r="up" data-d="860" style="display:flex;flex-direction:column;gap:1.2vh"><div style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35">Supporting Text</div><p style="margin:0;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">Minimal supporting copy keeps the visuals clean.</p></div>
+    <div data-r="up" data-d="960" style="display:flex;flex-direction:column;gap:1.2vh"><div style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35">Composition</div><p style="margin:0;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">Strong central subjects · Clear visual hierarchy · Controlled negative space · Consistent logo placement · Large type · Hairline rules</p></div>
+  </div>
+</section>
+
+<section id="consistency" data-sec data-screen-label="14 Brand Consistency" style="position:relative;min-height:100vh;box-sizing:border-box;padding:13vh 7.5vw 9vh;display:flex;flex-direction:column;overflow:hidden;scroll-snap-align:start;background:#fff8f1">
+  <div style="display:flex;justify-content:space-between;padding-bottom:1.4vh;font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.16em;text-transform:uppercase;color:#850e35"><span data-r="left">14 — Brand Consistency</span><span data-r="right">ROSE / SS 2026</span></div>
+  <div style="position:relative;height:1.5px;background:#e8ddd7"><div data-r="line" data-t="1400" style="position:absolute;inset:0;background:#850e35"></div></div>
+  <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:5vh">
+    <div style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(7vw,12.4vh);line-height:.95;letter-spacing:-0.02em;color:#850e35">
+      <div data-r="clip" data-d="150">One Brand.</div>
+      <div data-r="clip" data-d="320"><em>Different Stories.</em></div>
+    </div>
+    <p data-r="up" data-d="500" style="margin:0;max-width:34vw;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(15px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">Although each post tells a different story, all executions share the same visual language. This ensures every individual social-media execution belongs to the same ROSE campaign.</p>
+    <div style="display:flex;align-items:center;gap:1.4vw;margin-top:3vh;font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(2.4vw,4.3vh);line-height:1;letter-spacing:-0.02em;color:#4a1019">
+      <span data-r="up" data-d="700">Color</span>
+      <span data-r="line" data-d="900" data-t="600" style="width:5vw;height:1.5px;background:#850e35"></span>
+      <span data-r="up" data-d="1100">Typography</span>
+      <span data-r="line" data-d="1300" data-t="600" style="width:5vw;height:1.5px;background:#850e35"></span>
+      <span data-r="up" data-d="1500">Lighting</span>
+      <span data-r="line" data-d="1700" data-t="600" style="width:5vw;height:1.5px;background:#850e35"></span>
+      <span data-r="up" data-d="1900">Composition</span>
+      <span data-r="line" data-d="2100" data-t="600" style="width:5vw;height:1.5px;background:#850e35"></span>
+      <span data-r="up" data-d="2300" style="font-style:italic;color:#850e35">Branding</span>
+    </div>
+  </div>
+</section>
+
+<section id="final" data-sec data-screen-label="15 Final Statement" style="position:relative;height:100vh;min-height:100vh;overflow:hidden;scroll-snap-align:start;background:#fff8f1">
+  <div data-p="60" style="position:absolute;right:13vw;top:14vh;height:66vh;aspect-ratio:4/5">
+    <div data-r="img" data-t="2000" data-cursor="view" style="position:absolute;inset:0;overflow:hidden"><div data-inner style="position:absolute;inset:0"><div data-drift style="position:absolute;inset:0"><image-slot id="final-floral" shape="rect" placeholder="One large floral photograph"></image-slot></div></div></div>
+  </div>
+  <div style="position:absolute;left:7.5vw;top:22vh;z-index:2;font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(8.4vw,15vh);line-height:.92;letter-spacing:-0.03em;color:#850e35;pointer-events:none">
+    <div data-r="clip" data-d="300" data-t="1500">More Than</div>
+    <div data-r="clip" data-d="500" data-t="1500" style="padding-left:9vw"><em>Flowers.</em></div>
+  </div>
+  <div style="position:absolute;left:7.5vw;top:55vh;width:30vw;display:flex;flex-direction:column;gap:2.6vh;z-index:2">
+    <div data-r="up" data-d="900" style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:min(2.4vw,4.3vh);line-height:1.1;letter-spacing:-0.02em;color:#4a1019">A Way to Say What You Feel.</div>
+    <p data-r="up" data-d="1050" style="margin:0;max-width:26vw;font-family:'Hanken Grotesk',sans-serif;font-weight:400;font-size:max(14px,min(.94vw,1.67vh));line-height:1.5;color:#120b0c;text-wrap:pretty">ROSE transforms flowers into moments of connection, turning every bouquet into a message that speaks without words.</p>
+    <div data-r="up" data-d="1200"><a href="#cover" onClick="{{ goTop }}" style="display:inline-flex;border:1.5px solid #850e35;border-radius:60px;padding:max(12px,1.4vh) max(30px,2.24vw);font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(13px,min(.83vw,1.48vh));letter-spacing:.14em;text-transform:uppercase;color:#850e35;transition:background 300ms ease, color 300ms ease" style-hover="background:#850e35;color:#fff8f1">Back to the beginning</a></div>
+  </div>
+  <div style="position:absolute;left:7.5vw;right:7.5vw;bottom:9vh;display:flex;flex-direction:column;gap:1.6vh">
+    <div style="position:relative;height:1.5px;background:#e8ddd7"><div data-r="line" data-d="1300" data-t="1600" style="position:absolute;inset:0;background:#850e35"></div></div>
+    <div data-r="track" data-d="1500" data-t="1800" data-ls=".2em" style="font-family:'Hanken Grotesk',sans-serif;font-weight:300;font-size:max(11px,min(.73vw,1.3vh));letter-spacing:.2em;text-transform:uppercase;color:#850e35">ROSE — Every Feeling Deserves a Flower.</div>
+  </div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;snap&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Presentation&quot;},&quot;preloader&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Presentation&quot;},&quot;cursor&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;parallax&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+class Component extends DCLogic {
+  state = { idx: 0, delN: 0, mode: (() => { try { return localStorage.getItem('rose-mode') || 'edit'; } catch (e) { return 'edit'; } })() };
+  names = ['Cover','Campaign Overview','Campaign Objective','Target Audience','Creative Concept','Visual Direction','Content Pillars','The Campaign in Action','Morning Gesture','The Unexpected Surprise','A Story in Every Flower','The Emotional Gift','Typography & System','Brand Consistency','More Than Flowers'];
+  E = 'cubic-bezier(.16,1,.3,1)';
+  H = {
+    up:{opacity:'0',transform:'translate3d(0,6vh,0)'}, left:{opacity:'0',transform:'translate3d(-4vw,0,0)'}, right:{opacity:'0',transform:'translate3d(4vw,0,0)'},
+    slide:{opacity:'0',transform:'translate3d(22vw,0,0)'}, clip:{clipPath:'inset(-30% -10% 100% -10%)',transform:'translate3d(0,40%,0)'},
+    img:{clipPath:'inset(100% 0 0 0)'}, imgL:{clipPath:'inset(0 100% 0 0)'}, imgR:{clipPath:'inset(0 0 0 100%)'},
+    scale:{opacity:'0',transform:'scale(.88)'}, line:{transform:'scaleX(0)'}, grow:{transform:'scaleY(0)'}, fade:{opacity:'0'}, track:{opacity:'0',letterSpacing:'.6em'}
+  };
+  S = {
+    up:{opacity:'1',transform:'none'}, left:{opacity:'1',transform:'none'}, right:{opacity:'1',transform:'none'}, slide:{opacity:'1',transform:'none'},
+    clip:{clipPath:'inset(-30% -10% -30% -10%)',transform:'none'}, img:{clipPath:'inset(0 0 0 0)'}, imgL:{clipPath:'inset(0 0 0 0)'}, imgR:{clipPath:'inset(0 0 0 0)'},
+    scale:{opacity:'1',transform:'none'}, line:{transform:'scaleX(1)'}, grow:{transform:'scaleY(1)'}, fade:{opacity:'1'}, track:{opacity:'1'}
+  };
+
+  renderVals() {
+    const i = this.state.idx;
+    return {
+      idxNum: String(i + 1).padStart(2, '0'), idxName: this.names[i],
+      goTop: e => this.go(e, 'cover'), goCampaign: e => this.go(e, 'concept'),
+      goStories: e => this.go(e, 'exec1'), goContact: e => this.go(e, 'final'),
+      showCtrl: this.state.mode === 'edit' && !window.ROSE_PRINT, showEditBtn: this.state.mode === 'present' && !window.ROSE_PRINT,
+      toPresent: () => this.setMode('present'), toEdit: () => this.setMode('edit'), savePdf: () => this.savePdf(), saveBackup: () => this.saveBackup(), loadBackup: () => this.loadBackup(), hasDeleted: this.state.delN > 0, delN: this.state.delN,
+      deleteSlide: () => this.delSlide(), deleteImage: () => this.delImg(), replaceImage: () => this.replaceImg(), restoreAll: () => this.restore()
+    };
+  }
+  componentDidMount() { this._t = setTimeout(() => this.init(), 30); }
+  componentDidUpdate() { if (this.inited) { this.applySnap(); this.applyCursor(); this.applyEditable(); } }
+  componentWillUnmount() { clearTimeout(this._t); this.off && this.off(); }
+
+  q(s, r = document) { return Array.from(r.querySelectorAll(s)); }
+  applySnap() { document.documentElement.style.scrollSnapType = ((this.props.snap ?? true) && !window.ROSE_PRINT) ? 'y mandatory' : 'none'; }
+
+  hide(el) {
+    const t = el.dataset.r;
+    el.style.transition = 'none';
+    if (t === 'line' || t === 'grow') el.style.transformOrigin = el.dataset.o || (t === 'line' ? 'left center' : 'center bottom');
+    Object.assign(el.style, this.H[t] || this.H.up);
+    const inn = el.querySelector(':scope > [data-inner]');
+    if (inn) { inn.style.transition = 'none'; inn.style.transform = 'scale(1.15)'; }
+  }
+  show(el) {
+    const t = el.dataset.r, d = +(el.dataset.d || 0);
+    const dur = +(el.dataset.t || (t.startsWith('img') ? 1500 : 1100));
+    el.style.transition = ['opacity','transform','clip-path','letter-spacing'].map(p => `${p} ${dur}ms ${this.E} ${d}ms`).join(',');
+    Object.assign(el.style, this.S[t] || this.S.up);
+    if (t === 'track') el.style.letterSpacing = el.dataset.ls || '-0.02em';
+    const inn = el.querySelector(':scope > [data-inner]');
+    if (inn) { inn.style.transition = `transform ${dur + 600}ms ${this.E} ${d}ms`; inn.style.transform = 'scale(1)'; }
+  }
+  reveal(sec) {
+    if (this.reduced || sec._shown) return;
+    sec._shown = true;
+    const els = this.q('[data-r]', sec);
+    void sec.offsetHeight;
+    requestAnimationFrame(() => els.forEach(el => this.show(el)));
+  }
+  reset(sec) {
+    if (this.reduced || !sec._shown) return;
+    sec._shown = false;
+    this.q('[data-r]', sec).forEach(el => this.hide(el));
+  }
+
+  init() {
+    this.inited = true;
+
+    this.reduced = !!window.ROSE_PRINT || matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this.secs = this.q('[data-sec]');
+    this.pEls = this.q('[data-p],[data-px]').map(el => ({ el, sec: el.closest('[data-sec]'), p: +el.dataset.p || 0, px: +el.dataset.px || 0 })).filter(o => o.sec);
+    this.nav = document.querySelector('[data-nav]');
+    this.prog = document.querySelector('[data-prog]');
+    this.setupEditable();
+    this.del = this.loadDel();
+    this.applyDeleted();
+    this.loadReplaced();
+    this.applySnap();
+    if (!this.reduced) this.q('[data-sec] [data-r]').forEach(el => this.hide(el));
+
+    this.io = new IntersectionObserver(entries => entries.forEach(e => {
+      const s = e.target;
+      if (e.intersectionRatio >= 0.3) { s._vis = true; if (this.ready) this.reveal(s); }
+      else if (!e.isIntersecting) { s._vis = false; this.reset(s); }
+    }), { threshold: [0, 0.3, 0.6] });
+    this.secs.forEach(s => this.io.observe(s));
+
+    const onScroll = () => { if (!this.tick) { this.tick = true; requestAnimationFrame(() => { this.tick = false; this.update(); }); } };
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll);
+
+    const over = e => {
+      const c = e.target.closest && e.target.closest('[data-card]');
+      if (c && !c.contains(e.relatedTarget)) this.card(c, true);
+      const l = e.target.closest && e.target.closest('[data-link]');
+      if (l && !l.contains(e.relatedTarget)) this.link(l, true);
+      this.cursorMode(e.target);
+      this.imgHover(e.target);
+    };
+    const out = e => {
+      const c = e.target.closest && e.target.closest('[data-card]');
+      if (c && !c.contains(e.relatedTarget)) this.card(c, false);
+      const l = e.target.closest && e.target.closest('[data-link]');
+      if (l && !l.contains(e.relatedTarget)) this.link(l, false);
+    };
+    document.addEventListener('mouseover', over);
+    document.addEventListener('mouseout', out);
+
+    this.ambient();
+    this.setupCursor();
+    this.preloader();
+    this.update();
+    if (window.ROSE_PRINT && /autoprint/.test(location.search)) {
+      (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => setTimeout(() => { this.applyDeleted(); window.print(); }, 2000));
+    }
+
+    this.off = () => {
+      removeEventListener('scroll', onScroll); removeEventListener('resize', onScroll);
+      document.removeEventListener('mouseover', over); document.removeEventListener('mouseout', out);
+      this.io && this.io.disconnect(); cancelAnimationFrame(this.curRaf);
+      document.removeEventListener('mousemove', this.onMove);
+      const st = document.getElementById('rose-cursor-style'); st && st.remove();
+    };
+  }
+
+  setMode(m) {
+    if (window.ROSE_PRINT || m === this.state.mode) return;
+    try { localStorage.setItem('rose-mode', m); } catch (e) {}
+    const b = document.querySelector('[data-imgdel]'); if (b) b.style.display = 'none';
+    this.hovSlot = null;
+    this.setState({ mode: m });
+  }
+  savePdf() { window.open('ROSE%20Campaign-print.dc.html?autoprint=1', '_blank'); }
+  db() {
+    if (!this._db) this._db = new Promise((res, rej) => {
+      const r = indexedDB.open('rose-images', 1);
+      r.onupgradeneeded = () => r.result.createObjectStore('imgs');
+      r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
+    });
+    return this._db;
+  }
+  dbPut(k, v) { return this.db().then(d => new Promise(res => { const t = d.transaction('imgs', 'readwrite'); t.objectStore('imgs').put(v, k); t.oncomplete = res; t.onerror = res; })).catch(() => {}); }
+  dbAll() {
+    return this.db().then(d => new Promise(res => {
+      const out = {}, c = d.transaction('imgs', 'readonly').objectStore('imgs').openCursor();
+      c.onsuccess = () => { const cur = c.result; if (cur) { out[cur.key] = cur.value; cur.continue(); } else res(out); };
+      c.onerror = () => res(out);
+    })).catch(() => ({}));
+  }
+  loadReplaced() { this.dbAll().then(m => Object.keys(m).forEach(id => { const sl = document.getElementById(id); if (sl && sl.tagName === 'IMAGE-SLOT') this.setRep(sl, m[id]); })); }
+  setRep(sl, u) {
+    const host = sl.parentElement;
+    let im = host.querySelector(':scope > img[data-rep]');
+    if (!u) { if (im) im.remove(); return; }
+    if (typeof u !== 'string') { if (sl._repUrl) URL.revokeObjectURL(sl._repUrl); u = sl._repUrl = URL.createObjectURL(u); }
+    if (!im) { im = document.createElement('img'); im.setAttribute('data-rep', ''); im.alt = ''; im.decoding = 'async'; im.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none;display:block;image-rendering:auto'; host.appendChild(im); }
+    im.src = u;
+  }
+  shrink(url) {
+    return new Promise(res => {
+      const img = new Image();
+      img.onload = () => {
+        const m = 2400, k = Math.min(1, m / Math.max(img.width, img.height));
+        const c = document.createElement('canvas'); c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        try { res(c.toDataURL('image/jpeg', 0.9)); } catch (e) { res(url); }
+      };
+      img.onerror = () => res(url);
+      img.src = url;
+    });
+  }
+  replaceImg() {
+    const sl = this.hovSlot; if (!sl) return;
+    if (!this._inp) { const i = document.createElement('input'); i.type = 'file'; i.accept = 'image/*'; i.style.display = 'none'; document.body.appendChild(i); this._inp = i; }
+    const inp = this._inp;
+    inp.onchange = () => {
+      const f = inp.files && inp.files[0]; inp.value = ''; if (!f) return;
+      this.setRep(sl, f); this.dbPut(sl.id, f);
+    };
+    inp.click();
+  }
+  saveBackup() {
+    const toUrl = v => typeof v === 'string' ? Promise.resolve(v) : new Promise(r => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.onerror = () => r(null); fr.readAsDataURL(v); });
+    this.dbAll().then(m => Promise.all(Object.keys(m).map(k => toUrl(m[k]).then(u => [k, u]))).then(pairs => { const imgs = {}; pairs.forEach(([k, u]) => { if (u) imgs[k] = u; }); return imgs; })).then(imgs => {
+      let text = {}; try { text = JSON.parse(localStorage.getItem('rose-text-v1') || '{}'); } catch (e) {}
+      const data = { app: 'rose', v: 1, date: new Date().toISOString(), text, del: this.del, imgs };
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([JSON.stringify(data)], { type: 'application/json' }));
+      a.download = 'ROSE-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+    });
+  }
+  loadBackup() {
+    const i = document.createElement('input'); i.type = 'file'; i.accept = '.json,application/json'; i.style.display = 'none';
+    document.body.appendChild(i);
+    i.onchange = () => {
+      const f = i.files && i.files[0]; i.remove(); if (!f) return;
+      f.text().then(t => {
+        let d; try { d = JSON.parse(t); } catch (e) { alert('This file is not a valid ROSE backup.'); return; }
+        if (!d || d.app !== 'rose') { alert('This file is not a valid ROSE backup.'); return; }
+        try {
+          localStorage.setItem('rose-text-v1', JSON.stringify(d.text || {}));
+          localStorage.setItem('rose-deleted-v1', JSON.stringify(d.del || { secs: [], imgs: [] }));
+        } catch (e) {}
+        const imgs = d.imgs || {};
+        Promise.all(Object.keys(imgs).map(k => this.dbPut(k, imgs[k]))).then(() => location.reload());
+      });
+    };
+    i.click();
+  }
+  loadDel() {
+    try { const d = JSON.parse(localStorage.getItem('rose-deleted-v1') || 'null'); if (d && d.secs && d.imgs) return d; } catch (e) {}
+    return { secs: [], imgs: [] };
+  }
+  saveDel() { try { localStorage.setItem('rose-deleted-v1', JSON.stringify(this.del)); } catch (e) {} }
+  setHidden(el, h) { if (el._d === undefined) el._d = el.style.display; el.style.display = h ? 'none' : el._d; }
+  imgTarget(sl) {
+    const inn = sl.closest('[data-inner]'); if (!inn) return null;
+    const box = inn.parentElement, outer = box.parentElement;
+    if (outer.hasAttribute('data-p')) return outer;
+    if (outer.hasAttribute('data-card') && !outer.querySelector('p')) return outer;
+    return box;
+  }
+  applyDeleted() {
+    if (!this.secs || !this.del) return;
+    const d = this.del;
+    this.secs.forEach(s => this.setHidden(s, d.secs.includes(s.id)));
+    this.q('[data-sec] image-slot').forEach(sl => { const t = this.imgTarget(sl); if (t) this.setHidden(t, d.imgs.includes(sl.id)); });
+    const n = d.secs.length + d.imgs.length;
+    if (n !== this.state.delN) this.setState({ delN: n });
+    if (window.ROSE_PRINT) {
+      const dp = document.querySelector('doc-page');
+      const h = this.secs.filter(s => s.style.display !== 'none').reduce((a, s) => a + s.offsetHeight, 0);
+      if (dp && h) dp.setAttribute('height', h + 'px');
+    }
+  }
+  delSlide() {
+    const vis = this.secs.filter(s => s.style.display !== 'none');
+    const s = this.secs[this.state.idx];
+    if (!s || vis.length <= 1 || s.style.display === 'none') return;
+    this.del.secs.push(s.id); this.saveDel(); this.applyDeleted(); this.update();
+  }
+  delImg() {
+    if (!this.hovSlot) return;
+    this.del.imgs.push(this.hovSlot.id); this.saveDel(); this.applyDeleted();
+    const b = document.querySelector('[data-imgdel]'); if (b) b.style.display = 'none';
+    this.hovSlot = null; this._btnHover = false;
+  }
+  restore() { this.del = { secs: [], imgs: [] }; this.saveDel(); this.applyDeleted(); this.update(); }
+  imgHover(t) {
+    const b = document.querySelector('[data-imgdel]');
+    if (!b || !t.closest) return;
+    if (t.closest('[data-imgdel]')) { this._btnHover = true; return; }
+    this._btnHover = false;
+    const inn = t.closest('[data-sec] [data-inner]');
+    const sl = inn && inn.querySelector('image-slot');
+    if (!sl) { b.style.display = 'none'; this.hovSlot = null; return; }
+    if (this.hovSlot === sl) return;
+    this.hovSlot = sl;
+    const r = inn.parentElement.getBoundingClientRect();
+    b.style.display = 'flex';
+    b.style.transform = 'translate3d(' + Math.max(8, r.left + 12) + 'px,' + Math.max(8, r.top + 12) + 'px,0)';
+  }
+  setupEditable() {
+    const key = 'rose-text-v1';
+    let saved = {};
+    try { saved = JSON.parse(localStorage.getItem(key) || '{}'); } catch (e) {}
+    this.edEls = [];
+    this.q('[data-sec] *').forEach(el => {
+      if (el.closest('a,image-slot') || (el.parentElement && el.parentElement.closest('[data-ed]'))) return;
+      if (!Array.from(el.childNodes).some(n => n.nodeType === 3 && n.textContent.trim())) return;
+      const i = this.edEls.length;
+      el.setAttribute('data-ed', i);
+      el.spellcheck = false;
+      if (saved[i] != null) el.innerHTML = saved[i];
+      this.edEls.push(el);
+    });
+    let t;
+    const onInput = e => {
+      const el = e.target.closest && e.target.closest('[data-ed]');
+      if (!el) return;
+      saved[el.getAttribute('data-ed')] = el.innerHTML;
+      clearTimeout(t);
+      t = setTimeout(() => { try { localStorage.setItem(key, JSON.stringify(saved)); } catch (e) {} }, 300);
+    };
+    const onFocus = e => { const el = e.target.closest && e.target.closest('[data-ed]'); if (el && el.isContentEditable) { el.style.outline = '1px dashed #c58f94'; el.style.outlineOffset = '6px'; } };
+    const onBlur = e => { const el = e.target.closest && e.target.closest('[data-ed]'); if (el) el.style.outline = 'none'; };
+    const onKey = e => {
+      const ae = document.activeElement, typing = ae && ae.closest && ae.closest('[data-ed]') && ae.isContentEditable;
+      if (e.key === 'Escape' && typing) { ae.blur(); return; }
+      if (typing || e.metaKey || e.ctrlKey || e.altKey) return;
+      if (e.key === 'e' || e.key === 'E') this.setMode('edit');
+      if (e.key === 'p' || e.key === 'P') this.setMode('present');
+    };
+    document.addEventListener('input', onInput);
+    document.addEventListener('focusin', onFocus);
+    document.addEventListener('focusout', onBlur);
+    document.addEventListener('keydown', onKey);
+    this.applyEditable();
+  }
+  applyEditable() {
+    if (!this.edEls) return;
+    const on = this.state.mode === 'edit' && !window.ROSE_PRINT;
+    let st = document.getElementById('rose-present-style');
+    if (!on && !st) { st = document.createElement('style'); st.id = 'rose-present-style'; st.textContent = '[data-sec] image-slot{pointer-events:none}'; document.head.appendChild(st); }
+    if (on && st) st.remove();
+    if (!on && document.activeElement && document.activeElement.closest && document.activeElement.closest('[data-ed]')) document.activeElement.blur();
+    this.edEls.forEach(el => { el.contentEditable = on ? 'true' : 'false'; });
+  }
+
+  update() {
+    const vh = innerHeight, k = innerWidth / 1920, s = this.reduced ? 0 : (this.props.parallax ?? 1);
+    const rects = new Map();
+    const R = sec => { if (!rects.has(sec)) rects.set(sec, sec.getBoundingClientRect()); return rects.get(sec); };
+    for (const o of this.pEls) {
+      const r = R(o.sec);
+      if (r.bottom < -vh || r.top > 2 * vh) continue;
+      const off = (r.top + r.height / 2 - vh / 2) / vh;
+      o.el.style.transform = `translate3d(${(o.px * off * k * s).toFixed(1)}px,${(-o.p * off * k * s).toFixed(1)}px,0)`;
+    }
+    const y = scrollY, max = document.documentElement.scrollHeight - vh;
+    if (this.prog) this.prog.style.transform = `scaleY(${max > 0 ? Math.min(1, y / max) : 0})`;
+    if (this.nav) {
+      const c = y > vh * 0.3;
+      if (c !== this.navC) { this.navC = c; this.nav.style.paddingTop = this.nav.style.paddingBottom = c ? '1.5vh' : '2.6vh'; }
+    }
+    let idx = 0;
+    idx = this.secs.findIndex(sc => sc.style.display !== 'none'); if (idx < 0) idx = 0;
+    this.secs.forEach((sc, i) => { if (sc.style.display !== 'none' && R(sc).top <= vh * 0.5) idx = i; });
+    if (this.hovSlot && !this._btnHover) { const b = document.querySelector('[data-imgdel]'); if (b) b.style.display = 'none'; this.hovSlot = null; }
+    if (idx !== this.state.idx) this.setState({ idx });
+  }
+
+  card(c, on) {
+    const inn = c.querySelector('[data-inner]');
+    if (inn) { inn.style.transition = `transform 1100ms ${this.E}`; inn.style.transform = on ? 'scale(1.05)' : 'scale(1)'; }
+    this.q('[data-cap]', c).forEach(x => { x.style.transition = `opacity 400ms ${this.E}, transform 500ms ${this.E}`; x.style.opacity = on ? '1' : '0'; x.style.transform = on ? 'none' : 'translateY(8px)'; });
+    this.q('[data-frame]', c).forEach(x => x.style.opacity = on ? '1' : '0');
+    this.q('[data-lbl]', c).forEach(x => x.style.color = on ? '#850e35' : '#120b0c');
+  }
+  link(l, on) { const u = l.querySelector('[data-ul]'); if (u) u.style.transform = on ? 'scaleX(1)' : 'scaleX(0)'; }
+
+  ambient() {
+    if (this.reduced) return;
+    this.q('[data-sway]').forEach((el, i) => el.animate(
+      [{ transform: 'rotate(-3deg) translateY(0px)' }, { transform: 'rotate(2deg) translateY(-20px)' }],
+      { duration: 5200 + i * 800, direction: 'alternate', iterations: Infinity, easing: 'ease-in-out' }));
+    this.q('[data-drift]').forEach(el => el.animate(
+      [{ transform: 'scale(1)' }, { transform: 'scale(1.07)' }],
+      { duration: 16000, direction: 'alternate', iterations: Infinity, easing: 'ease-in-out' }));
+    this.q('[data-light]').forEach(el => el.animate(
+      [{ transform: 'translateX(-120%) skewX(-18deg)' }, { transform: 'translateX(560%) skewX(-18deg)' }],
+      { duration: 12000, iterations: Infinity, easing: 'ease-in-out' }));
+    this.q('[data-petal]').forEach(el => {
+      const x = Math.random() * 16 - 8, r = Math.random() * 540 - 270;
+      el.animate([
+        { transform: 'translate3d(0,-10vh,0) rotate(0deg)', opacity: 0 },
+        { opacity: 0.85, offset: 0.15 }, { opacity: 0.85, offset: 0.85 },
+        { transform: `translate3d(${x}vw,110vh,0) rotate(${r}deg)`, opacity: 0 }
+      ], { duration: 15000 + Math.random() * 9000, delay: -Math.random() * 20000, iterations: Infinity, easing: 'linear' });
+    });
+  }
+
+  setupCursor() {
+    this.cur = document.querySelector('[data-cursor-el]');
+    this.dot = document.querySelector('[data-cursor-dot]');
+    this.txt = document.querySelector('[data-cursor-txt]');
+    this.mx = this.cx = innerWidth / 2; this.my = this.cy = innerHeight / 2;
+    this.onMove = e => { this.mx = e.clientX; this.my = e.clientY; if (this.cur && this.curOn) this.cur.style.opacity = '1'; };
+    document.addEventListener('mousemove', this.onMove);
+    const loop = () => {
+      this.cx += (this.mx - this.cx) * 0.2; this.cy += (this.my - this.cy) * 0.2;
+      if (this.cur && this.curOn) this.cur.style.transform = `translate3d(${this.cx.toFixed(1)}px,${this.cy.toFixed(1)}px,0)`;
+      this.curRaf = requestAnimationFrame(loop);
+    };
+    loop();
+    this.applyCursor();
+  }
+  applyCursor() {
+    if (!this.cur) return;
+    const on = (this.props.cursor ?? true) && !this.reduced && matchMedia('(pointer: fine)').matches && innerWidth > 900;
+    this.curOn = on;
+    this.cur.style.display = on ? 'block' : 'none';
+    let st = document.getElementById('rose-cursor-style');
+    if (on && !st) { st = document.createElement('style'); st.id = 'rose-cursor-style'; st.textContent = '*{cursor:none !important}'; document.head.appendChild(st); }
+    if (!on && st) st.remove();
+  }
+  cursorMode(t) {
+    if (!this.dot || !t.closest) return;
+    const m = t.closest('[data-cursor]') ? 'view' : t.closest('a,button,[data-link]') ? 'link' : 'dot';
+    if (m === this.cm) return;
+    this.cm = m;
+    this.dot.style.transform = m === 'view' ? 'scale(1)' : m === 'link' ? 'scale(.5)' : 'scale(.13)';
+    this.dot.style.background = m === 'link' ? 'transparent' : '#850e35';
+    this.txt.style.opacity = m === 'view' ? '1' : '0';
+  }
+
+  preloader() {
+    const pre = document.querySelector('[data-pre]');
+    const h = document.documentElement;
+    const done = () => { this.ready = true; h.style.overflow = ''; this.secs.forEach(s => s._vis && this.reveal(s)); };
+    if (!pre) return done();
+    if (!(this.props.preloader ?? true) || this.reduced) { pre.style.display = 'none'; return done(); }
+    try { history.scrollRestoration = 'manual'; } catch (e) {}
+    h.style.overflow = 'hidden'; scrollTo(0, 0);
+    const E = this.E;
+    const a = (sel, kf, o) => this.q(sel, pre).forEach((el, i) => el.animate(kf, { fill: 'both', easing: E, duration: o.duration, delay: (o.delay || 0) + i * (o.stagger || 0) }));
+    a('[data-pl-line]', [{ transform: 'scaleX(0)' }, { transform: 'scaleX(1)' }], { duration: 1000 });
+    a('[data-pl-word]', [{ transform: 'translateY(105%)' }, { transform: 'none' }], { duration: 1100, delay: 350 });
+    a('[data-pl-l]', [{ transform: 'translateY(110%)' }, { transform: 'none' }], { duration: 900, delay: 700, stagger: 150 });
+    a('[data-pl-bot]', [{ opacity: 0, transform: 'translateY(4vh)' }, { opacity: 1, transform: 'none' }], { duration: 1400, delay: 900 });
+    this._t2 = setTimeout(() => {
+      const an = pre.animate([{ clipPath: 'inset(0 0 0 0)' }, { clipPath: 'inset(0 0 100% 0)' }], { duration: 1100, easing: 'cubic-bezier(.76,0,.24,1)', fill: 'forwards' });
+      setTimeout(done, 380);
+      an.onfinish = () => { pre.style.display = 'none'; };
+    }, 2400);
+  }
+
+  go(e, id) {
+    e && e.preventDefault && e.preventDefault();
+    const t = document.getElementById(id);
+    if (!t) return;
+    const h = document.documentElement;
+    const jump = () => {
+      const snap = h.style.scrollSnapType;
+      h.style.scrollSnapType = 'none';
+      scrollTo({ top: t.getBoundingClientRect().top + scrollY, behavior: 'instant' });
+      requestAnimationFrame(() => { h.style.scrollSnapType = snap; });
+    };
+    const ov = document.querySelector('[data-trans]');
+    const ln = ov && ov.querySelector('[data-trans-line]');
+    if (this.reduced || !ov) return jump();
+    const io = 'cubic-bezier(.76,0,.24,1)';
+    ov.animate([{ clipPath: 'inset(100% 0 0 0)' }, { clipPath: 'inset(0 0 0 0)' }], { duration: 320, easing: io, fill: 'forwards' });
+    ln.animate([{ transform: 'scaleY(0)', opacity: 1 }, { transform: 'scaleY(1)', opacity: 1 }], { duration: 340, delay: 140, easing: this.E, fill: 'forwards' });
+    setTimeout(() => {
+      jump();
+      ov.animate([{ clipPath: 'inset(0 0 0 0)' }, { clipPath: 'inset(0 0 100% 0)' }], { duration: 400, easing: io, fill: 'forwards' });
+      ln.animate([{ transform: 'scaleY(1)', opacity: 1 }, { transform: 'scaleY(1)', opacity: 0 }], { duration: 260, fill: 'forwards' });
+    }, 500);
+  }
+}
+</script>
+</body>
+</html>
